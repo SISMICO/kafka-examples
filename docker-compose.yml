@@ -152,5 +152,6 @@ services:
       kafka-topics --create --if-not-exists --bootstrap-server broker:29092 --topic orders --partitions 3 --replication-factor 1 &&
       kafka-topics --create --if-not-exists --bootstrap-server broker:29092 --topic payments --partitions 3 --replication-factor 1 &&
       kafka-topics --create --if-not-exists --bootstrap-server broker:29092 --topic inventory --partitions 3 --replication-factor 1 &&
+      kafka-topics --create --if-not-exists --bootstrap-server broker:29092 --topic delivery --partitions 3 --replication-factor 1 &&
       sleep infinity
       "
