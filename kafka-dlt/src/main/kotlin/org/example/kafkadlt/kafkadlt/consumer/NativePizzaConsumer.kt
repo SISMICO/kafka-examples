@@ -30,7 +30,7 @@ class NativePizzaConsumer(
     ) {
         val attempt = attemptHeader ?: 1
         log.info("[NativeConsumer] Received pizza: {} (attempt={})", pizza, attempt)
-        probabilityFailureService.maybeFail("NativeKafkaConsumer for ${'$'}{pizza.id}")
+        probabilityFailureService.maybeFail("NativeKafkaConsumer for ${pizza.id}")
         val retries = attempt - 1
         log.info("[NativeConsumer] Processed pizza {} successfully after {} attempt(s) (retries={})", pizza.id, attempt, retries)
     }

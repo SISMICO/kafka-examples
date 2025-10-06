@@ -22,7 +22,7 @@ class StreamPizzaConsumer(
             ?: message.headers.get("deliveryAttempt") as? Int
         val attempt = attemptHeader ?: 1
         log.info("[StreamConsumer] Received pizza: {} (attempt={})", pizza, attempt)
-        probabilityFailureService.maybeFail("SpringCloudStreamConsumer for ${'$'}{pizza.id}")
+        probabilityFailureService.maybeFail("SpringCloudStreamConsumer for ${pizza.id}")
         val retries = attempt - 1
         log.info("[StreamConsumer] Processed pizza {} successfully after {} attempt(s) (retries={})", pizza.id, attempt, retries)
     }

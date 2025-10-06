@@ -155,3 +155,51 @@ services:
       kafka-topics --create --if-not-exists --bootstrap-server broker:29092 --topic delivery --partitions 3 --replication-factor 1 &&
       sleep infinity
       "
+
+  # Kafka Spring Example Application
+  kafka-spring:
+    build:
+      context: ./kafka-spring
+      dockerfile: Dockerfile
+    container_name: kafka-spring
+    profiles:
+      - example
+    depends_on:
+      - broker
+      - kafka-init
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      KAFKA_BOOTSTRAP_SERVERS: broker:29092
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: broker:29092
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Kafka DLT Application
+  kafka-dlt:
+    build:
+      context: ./kafka-dlt
+      dockerfile: Dockerfile
+    container_name: kafka-dlt
+    profiles:
+      - dlt
+    depends_on:
+      - broker
+      - kafka-init
+    ports:
+      - "8082:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      KAFKA_BOOTSTRAP_SERVERS: broker:29092
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: broker:29092
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

@@ -11,7 +11,7 @@ set -euo pipefail
 #   scripts/publish-pizzas.sh 25        # posts 25 pizzas
 #   PIZZA_API_URL=http://host:port/pizzas scripts/publish-pizzas.sh
 
-URL="${PIZZA_API_URL:-http://localhost:8080/pizzas}"
+URL="${PIZZA_API_URL:-http://localhost:8082/pizzas}"
 COUNT="${1:-10}"
 
 SIZES=(P M G)
