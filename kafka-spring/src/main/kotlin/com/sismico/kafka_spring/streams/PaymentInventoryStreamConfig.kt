@@ -9,9 +9,11 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.kafka.annotation.EnableKafkaStreams
 import java.time.Duration
 
 @Configuration
+@EnableKafkaStreams
 class PaymentInventoryStreamConfig(
     @Value("\${app.kafka.topic.payments}") private val paymentsTopic: String,
     @Value("\${app.kafka.topic.inventory}") private val inventoryTopic: String,
